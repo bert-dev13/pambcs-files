@@ -1,0 +1,169 @@
+.employee-card {
+  --card-radius: 14px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.95rem 1rem;
+  text-align: left;
+  border: 2px solid var(--color-border);
+  border-radius: var(--card-radius);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  overflow: hidden;
+  animation: cardStagger var(--duration-slow) cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.employee-card__border,
+.employee-card__glow {
+  display: none;
+}
+
+.employee-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-blue);
+}
+
+.employee-card:active {
+  transform: translateY(-1px) scale(0.99);
+  border-color: var(--color-blue-dark);
+  background-color: var(--color-blue-soft);
+}
+
+.employee-card:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+.employee-card__icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.employee-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform 0.35s ease, background-color 0.35s ease;
+}
+
+.employee-card__icon--user {
+  width: 40px;
+  height: 40px;
+  font-size: 1.05rem;
+  color: var(--color-card);
+  background-color: var(--color-blue);
+  box-shadow: 0 3px 10px rgba(var(--color-blue-rgb), 0.3);
+}
+
+.employee-card:hover .employee-card__icon--user {
+  transform: scale(1.08);
+  background-color: var(--color-blue-dark);
+}
+
+.employee-card__icon--folder {
+  position: absolute;
+  bottom: -2px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  font-size: 0.6rem;
+  color: var(--color-blue-dark);
+  background-color: var(--color-card);
+  border: 2px solid var(--color-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.employee-card:hover .employee-card__icon--folder {
+  transform: scale(1.1) rotate(-6deg);
+  border-color: var(--color-blue-dark);
+}
+
+.employee-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.employee-card__name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.25s ease;
+}
+
+.employee-card:hover .employee-card__name {
+  color: var(--color-blue);
+}
+
+.employee-card:active .employee-card__name {
+  color: var(--color-blue-dark);
+}
+
+.employee-card__hint {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.25s ease;
+}
+
+.employee-card:hover .employee-card__hint {
+  color: var(--color-blue);
+}
+
+.employee-card__arrow {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  color: var(--color-border);
+  transition: color 0.25s ease, transform 0.35s ease;
+}
+
+.employee-card:hover .employee-card__arrow {
+  color: var(--color-blue);
+  transform: translate(2px, -2px);
+}
+
+@keyframes cardStagger {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .employee-card { padding: 0.85rem 0.9rem; }
+  .employee-card__icon--user { width: 36px; height: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .employee-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .employee-card:hover { transform: none !important; }
+}

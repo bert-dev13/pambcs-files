@@ -1,0 +1,146 @@
+.quick-pdf-tools {
+  --section-radius: 24px;
+  position: relative;
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  padding: 1.75rem;
+  border-radius: var(--section-radius);
+  background-color: var(--color-card);
+  border: 3px solid var(--color-blue-light);
+  box-shadow: var(--shadow-md);
+  overflow: visible;
+  margin-bottom: 0.5rem;
+  animation: sectionEnter var(--duration-slow) cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.quick-pdf-tools:hover {
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-blue-light);
+}
+
+.quick-pdf-tools__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.quick-pdf-tools__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--color-blue-light);
+  box-shadow: 0 4px 16px rgba(var(--color-blue-light-rgb), 0.35);
+  transition: transform 0.35s ease, background-color 0.35s ease;
+}
+
+.quick-pdf-tools:hover .quick-pdf-tools__badge {
+  transform: scale(1.06);
+  background-color: var(--color-blue);
+}
+
+.quick-pdf-tools__badge-icon {
+  font-size: 1.35rem;
+  color: var(--color-card);
+}
+
+.quick-pdf-tools__header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.quick-pdf-tools__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--color-blue);
+}
+
+.quick-pdf-tools__emoji {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.quick-pdf-tools__subtitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.quick-pdf-tools__accent-line {
+  height: 4px;
+  margin: 0 auto 1.5rem;
+  max-width: 120px;
+  border-radius: 4px;
+  background-color: var(--color-blue-light);
+  position: relative;
+  z-index: 1;
+  transition: background-color 0.35s ease;
+}
+
+.quick-pdf-tools:hover .quick-pdf-tools__accent-line {
+  background-color: var(--color-blue);
+}
+
+.quick-pdf-tools__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .quick-pdf-tools {
+    padding: 1.35rem;
+    margin-top: 0;
+  }
+
+  .quick-pdf-tools__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-pdf-tools__header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .quick-pdf-tools__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-pdf-tools {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .quick-pdf-tools:hover .quick-pdf-tools__badge {
+    transform: none !important;
+  }
+}
