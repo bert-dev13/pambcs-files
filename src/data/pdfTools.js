@@ -3,30 +3,26 @@ import { FiFileMinus, FiMinimize2, FiLayers, FiRotateCw } from 'react-icons/fi';
 export const pdfTools = [
   {
     name: 'Remove PDF Pages',
-    description: 'Delete unwanted pages from PDF files.',
+    description: 'Delete selected pages from a PDF document.',
     url: 'https://tools.pdf24.org/en/remove-pdf-pages',
     icon: FiFileMinus,
-    variant: 'blue',
   },
   {
     name: 'Compress PDF',
-    description: 'Reduce PDF file size quickly and easily.',
+    description: 'Reduce the file size of a PDF document.',
     url: 'https://tools.pdf24.org/en/compress-pdf',
     icon: FiMinimize2,
-    variant: 'blue-dark',
   },
   {
     name: 'Merge PDF',
-    description: 'Combine multiple PDF files into one.',
+    description: 'Combine multiple PDF files into one document.',
     url: 'https://tools.pdf24.org/en/merge-pdf',
     icon: FiLayers,
-    variant: 'blue',
   },
   {
     name: 'Rotate PDF Pages',
-    description: 'Rotate pages to the correct orientation.',
+    description: 'Correct the orientation of selected PDF pages.',
     url: 'https://tools.pdf24.org/en/rotate-pdf-pages',
     icon: FiRotateCw,
-    variant: 'blue-dark',
   },
 ];

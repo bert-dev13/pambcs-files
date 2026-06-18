@@ -1,162 +1,276 @@
 .employee-card {
-  --card-radius: 14px;
+  --employee-card-index: 0;
+  --avatar-accent: #2563eb;
+  --avatar-accent-soft: #dbeafe;
   position: relative;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.85rem;
+  gap: 8px;
   width: 100%;
-  padding: 0.95rem 1rem;
+  height: 100%;
+  min-height: 36px;
+  padding: 8px 9px 8px 11px;
   text-align: left;
-  border: 2px solid var(--color-border);
-  border-radius: var(--card-radius);
-  background-color: var(--color-card);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background:
+    linear-gradient(105deg, rgba(219, 234, 254, 0.32) 0%, rgba(255, 255, 255, 0) 48%),
+    var(--color-card);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(15, 23, 42, 0.04);
   cursor: pointer;
   overflow: hidden;
-  animation: cardStagger var(--duration-slow) cubic-bezier(0.22, 1, 0.36, 1) both;
+  isolation: isolate;
+  animation: incomingCardEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
   transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s ease,
-    border-color 0.35s ease;
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
 }
 
-.employee-card__border,
+.employee-card--blue {
+  --avatar-accent: #2563eb;
+  --avatar-accent-soft: #dbeafe;
+}
+
+.employee-card--indigo {
+  --avatar-accent: #4f46e5;
+  --avatar-accent-soft: #e0e7ff;
+}
+
+.employee-card--sky {
+  --avatar-accent: #0284c7;
+  --avatar-accent-soft: #e0f2fe;
+}
+
+.employee-card--cyan {
+  --avatar-accent: #0891b2;
+  --avatar-accent-soft: #cffafe;
+}
+
 .employee-card__glow {
-  display: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 0% 50%,
+    color-mix(in srgb, var(--avatar-accent) 14%, transparent),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.employee-card__accent-bar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--avatar-accent) 0%, #60a5fa 100%);
+  transform: translateY(-50%);
+  transition: height 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .employee-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  border-color: var(--color-blue);
-  box-shadow: var(--shadow-blue);
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  background:
+    linear-gradient(105deg, color-mix(in srgb, var(--avatar-accent-soft) 55%, transparent) 0%, rgba(255, 255, 255, 0) 52%),
+    #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 6px 16px color-mix(in srgb, var(--avatar-accent) 12%, transparent),
+    0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.employee-card:hover .employee-card__glow {
+  opacity: 1;
+}
+
+.employee-card:hover .employee-card__accent-bar {
+  height: 62%;
 }
 
 .employee-card:active {
-  transform: translateY(-1px) scale(0.99);
-  border-color: var(--color-blue-dark);
-  background-color: var(--color-blue-soft);
+  transform: translateY(0);
+  background-color: var(--avatar-accent-soft);
 }
 
 .employee-card:focus-visible {
-  outline: 2px solid var(--color-blue);
+  outline: 2px solid var(--avatar-accent);
   outline-offset: 2px;
 }
 
-.employee-card__icon-wrap {
+.employee-card__avatar-wrap {
   position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.employee-card__icon {
+.employee-card__avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: transform 0.35s ease, background-color 0.35s ease;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--avatar-accent);
+  background: linear-gradient(145deg, #ffffff 0%, var(--avatar-accent-soft) 100%);
+  border: 1px solid color-mix(in srgb, var(--avatar-accent) 18%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 2px 6px color-mix(in srgb, var(--avatar-accent) 14%, transparent);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease;
 }
 
-.employee-card__icon--user {
-  width: 40px;
-  height: 40px;
-  font-size: 1.05rem;
-  color: var(--color-card);
-  background-color: var(--color-blue);
-  box-shadow: 0 3px 10px rgba(var(--color-blue-rgb), 0.3);
-}
-
-.employee-card:hover .employee-card__icon--user {
-  transform: scale(1.08);
-  background-color: var(--color-blue-dark);
-}
-
-.employee-card__icon--folder {
+.employee-card__folder-badge {
   position: absolute;
-  bottom: -2px;
-  right: -4px;
-  width: 20px;
-  height: 20px;
-  font-size: 0.6rem;
-  color: var(--color-blue-dark);
-  background-color: var(--color-card);
-  border: 2px solid var(--color-blue);
-  box-shadow: var(--shadow-sm);
+  right: -5px;
+  bottom: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--avatar-accent) 0%, color-mix(in srgb, var(--avatar-accent) 80%, #0f172a) 100%);
+  border: 1.5px solid var(--color-card);
+  box-shadow: 0 2px 5px color-mix(in srgb, var(--avatar-accent) 30%, transparent);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease;
 }
 
-.employee-card:hover .employee-card__icon--folder {
-  transform: scale(1.1) rotate(-6deg);
-  border-color: var(--color-blue-dark);
+.employee-card__folder-icon {
+  font-size: 0.5rem;
+  stroke-width: 2.75;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.employee-card:hover .employee-card__avatar-wrap {
+  transform: translateY(-1px);
+}
+
+.employee-card:hover .employee-card__avatar {
+  transform: scale(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 4px 10px color-mix(in srgb, var(--avatar-accent) 22%, transparent);
+}
+
+.employee-card:hover .employee-card__folder-badge {
+  transform: scale(1.1) rotate(-4deg);
+  box-shadow: 0 3px 8px color-mix(in srgb, var(--avatar-accent) 35%, transparent);
+}
+
+.employee-card:hover .employee-card__folder-icon {
+  transform: scale(1.05);
 }
 
 .employee-card__content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
+  position: relative;
+  z-index: 2;
   flex: 1;
   min-width: 0;
 }
 
 .employee-card__name {
-  font-size: 0.92rem;
+  display: block;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color 0.25s ease;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+  transition: color 200ms ease, transform 200ms ease;
 }
 
 .employee-card:hover .employee-card__name {
-  color: var(--color-blue);
+  color: color-mix(in srgb, var(--avatar-accent) 85%, #0f172a);
+  transform: translateX(1px);
 }
 
-.employee-card:active .employee-card__name {
-  color: var(--color-blue-dark);
-}
-
-.employee-card__hint {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  transition: color 0.25s ease;
-}
-
-.employee-card:hover .employee-card__hint {
-  color: var(--color-blue);
-}
-
-.employee-card__arrow {
+.employee-card__action {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  font-size: 0.9rem;
-  color: var(--color-border);
-  transition: color 0.25s ease, transform 0.35s ease;
+  border-radius: 7px;
+  color: var(--avatar-accent);
+  background: linear-gradient(180deg, #ffffff 0%, var(--avatar-accent-soft) 100%);
+  border: 1px solid color-mix(in srgb, var(--avatar-accent) 14%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 4px color-mix(in srgb, var(--avatar-accent) 10%, transparent);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
 }
 
-.employee-card:hover .employee-card__arrow {
-  color: var(--color-blue);
-  transform: translate(2px, -2px);
+.employee-card__action-icon {
+  font-size: 0.6875rem;
+  stroke-width: 2.25;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes cardStagger {
+.employee-card:hover .employee-card__action {
+  background: linear-gradient(135deg, var(--avatar-accent) 0%, color-mix(in srgb, var(--avatar-accent) 80%, #0f172a) 100%);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--avatar-accent) 32%, transparent);
+  transform: scale(1.08);
+}
+
+.employee-card:hover .employee-card__action-icon {
+  transform: translate(1px, -1px) scale(1.05);
+}
+
+@keyframes incomingCardEnter {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.97);
+    transform: translateY(8px) translateX(-4px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) translateX(0);
   }
 }
 
-@media (max-width: 480px) {
-  .employee-card { padding: 0.85rem 0.9rem; }
-  .employee-card__icon--user { width: 36px; height: 36px; }
+@media (max-width: 479px) {
+  .employee-card {
+    padding: 8px 10px 8px 12px;
+  }
+
+  .employee-card__name {
+    font-size: 0.8125rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -165,5 +279,19 @@
     opacity: 1 !important;
     transform: none !important;
   }
-  .employee-card:hover { transform: none !important; }
+
+  .employee-card:hover,
+  .employee-card:hover .employee-card__avatar-wrap,
+  .employee-card:hover .employee-card__avatar,
+  .employee-card:hover .employee-card__folder-badge,
+  .employee-card:hover .employee-card__folder-icon,
+  .employee-card:hover .employee-card__name,
+  .employee-card:hover .employee-card__action,
+  .employee-card:hover .employee-card__action-icon {
+    transform: none !important;
+  }
+
+  .employee-card:hover .employee-card__accent-bar {
+    height: 0;
+  }
 }

@@ -1,14 +1,162 @@
 .app {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  animation: fadeIn 400ms ease forwards;
+}
+
+/* ── Live animated page background ── */
+
+.app__background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+.app__mesh {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 70% 55% at 20% 20%, rgba(37, 99, 235, 0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 65% 50% at 80% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 52%),
+    radial-gradient(ellipse 60% 45% at 50% 85%, rgba(30, 58, 138, 0.1) 0%, transparent 55%);
+  animation: meshDrift 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.app__mesh--layer-2 {
+  inset: -15%;
+  opacity: 0.75;
+  background:
+    radial-gradient(ellipse 55% 45% at 70% 60%, rgba(96, 165, 250, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 15% 70%, rgba(37, 99, 235, 0.1) 0%, transparent 48%);
+  animation: meshDriftAlt 22s ease-in-out infinite;
+}
+
+.app__grid {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  opacity: 0.4;
+  background-image: radial-gradient(rgba(37, 99, 235, 0.16) 0.65px, transparent 0.65px);
+  background-size: 24px 24px;
+  animation: gridScroll 48s linear infinite;
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 20%, transparent 72%);
+}
+
+.app__beam {
+  position: absolute;
+  top: -30%;
+  left: -40%;
+  width: 80%;
+  height: 160%;
+  background: linear-gradient(
+    115deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 58%
+  );
+  transform: rotate(-8deg);
+  animation: beamSweep 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.app__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform;
+}
+
+.app__orb--primary {
+  top: -10%;
+  left: -8%;
+  width: min(540px, 58vw);
+  height: min(540px, 58vw);
+  background: rgba(37, 99, 235, 0.2);
+  animation: orbLivePrimary 16s ease-in-out infinite;
+}
+
+.app__orb--accent {
+  top: 8%;
+  right: -12%;
+  width: min(480px, 52vw);
+  height: min(480px, 52vw);
+  background: rgba(56, 189, 248, 0.16);
+  animation: orbLiveAccent 20s ease-in-out infinite;
+}
+
+.app__orb--soft {
+  bottom: -15%;
+  left: 25%;
+  width: min(580px, 62vw);
+  height: min(580px, 62vw);
+  background: rgba(30, 58, 138, 0.14);
+  animation: orbLiveSoft 18s ease-in-out infinite;
+}
+
+.app__orb--glow {
+  top: 40%;
+  left: 45%;
+  width: min(320px, 38vw);
+  height: min(320px, 38vw);
+  background: rgba(96, 165, 250, 0.12);
+  animation: orbLiveGlow 14s ease-in-out infinite;
+}
+
+.app__particles {
+  position: absolute;
+  inset: 0;
+}
+
+.app__particle {
+  --particle-index: 0;
+  --particle-x: calc((var(--particle-index) * 17 + 11) * 1%);
+  --particle-size: calc(2px + (var(--particle-index) % 3) * 1px);
+  --particle-duration: calc(12s + (var(--particle-index) % 6) * 3s);
+  --particle-delay: calc(var(--particle-index) * -1.4s);
+
+  position: absolute;
+  left: calc(var(--particle-x) - 5%);
+  bottom: -5%;
+  width: var(--particle-size);
+  height: var(--particle-size);
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.35);
+  opacity: 0;
+  animation: particleRise var(--particle-duration) linear infinite;
+  animation-delay: var(--particle-delay);
+}
+
+.app__particle:nth-child(3n) {
+  background: rgba(56, 189, 248, 0.4);
+}
+
+.app__particle:nth-child(3n + 1) {
+  background: rgba(37, 99, 235, 0.3);
+}
+
+.app__particle:nth-child(5n) {
+  --particle-size: 3px;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+}
+
+.app__content {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--color-bg);
-  animation: fadeIn var(--duration-slow) ease forwards;
 }
 
 .app__main {
   flex: 1;
-  padding: 1.75rem 1.75rem 3rem;
+  padding: 24px 24px 32px;
 }
 
 .app__container {
@@ -16,17 +164,183 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.25rem;
+  gap: 20px;
   align-items: stretch;
+  padding: 4px;
 }
 
-@media (max-width: 900px) {
+.app__container > .section-card {
+  min-height: 0;
+}
+
+@keyframes meshDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(4%, 3%) scale(1.06) rotate(1deg);
+  }
+  66% {
+    transform: translate(-3%, 5%) scale(0.97) rotate(-1deg);
+  }
+}
+
+@keyframes meshDriftAlt {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-5%, -4%) scale(1.08);
+  }
+}
+
+@keyframes gridScroll {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(24px, 24px);
+  }
+}
+
+@keyframes beamSweep {
+  0%, 100% {
+    transform: rotate(-8deg) translateX(-30%) translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: rotate(-8deg) translateX(120%) translateY(8%);
+    opacity: 0.85;
+  }
+}
+
+@keyframes orbLivePrimary {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10vw, 8vh) scale(1.1);
+  }
+  50% {
+    transform: translate(6vw, 18vh) scale(0.92);
+  }
+  75% {
+    transform: translate(-8vw, 10vh) scale(1.06);
+  }
+}
+
+@keyframes orbLiveAccent {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  30% {
+    transform: translate(-12vw, 6vh) scale(1.08);
+  }
+  60% {
+    transform: translate(-6vw, -8vh) scale(0.94);
+  }
+  85% {
+    transform: translate(8vw, 4vh) scale(1.04);
+  }
+}
+
+@keyframes orbLiveSoft {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(8vw, -12vh) scale(1.07);
+  }
+  70% {
+    transform: translate(-10vw, -6vh) scale(0.96);
+  }
+}
+
+@keyframes orbLiveGlow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-15vw, 12vh) scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes particleRise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(calc((var(--particle-index) % 5 - 2) * 12px));
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1199px) {
   .app__main {
-    padding: 1.5rem 1rem 2.5rem;
+    padding: 20px 24px 28px;
+  }
+}
+
+@media (max-width: 991px) {
+  .app__main {
+    padding: 20px 20px 24px;
   }
 
   .app__container {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 20px;
+  }
+
+  .app__orb {
+    filter: blur(56px);
+  }
+
+  .app__particle {
+    animation-duration: calc(10s + (var(--particle-index) % 5) * 2s);
+  }
+}
+
+@media (max-width: 767px) {
+  .app__main {
+    padding: 16px 16px 20px;
+  }
+
+  .app__container {
+    gap: 16px;
+  }
+
+  .app__grid {
+    opacity: 0.28;
+  }
+
+  .app__particles {
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app__mesh,
+  .app__mesh--layer-2,
+  .app__grid,
+  .app__beam,
+  .app__orb--primary,
+  .app__orb--accent,
+  .app__orb--soft,
+  .app__orb--glow,
+  .app__particle {
+    animation: none !important;
+  }
+
+  .app__particle {
+    display: none;
   }
 }
