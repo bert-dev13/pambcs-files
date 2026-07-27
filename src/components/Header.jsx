@@ -1,5 +1,6 @@
 import denrLogo from '@assets/images/DENR-LOGO.png';
 import bagongPilipinasLogo from '@assets/images/BAGONG-PILIPINAS-LOGO.png';
+import ThemeToggle from './ThemeToggle';
 import '../styles/Header.css';
 
 function Header() {
@@ -36,6 +37,10 @@ function Header() {
             />
           </div>
         </div>
+      </div>
+
+      <div className="header__theme-toggle">
+        <ThemeToggle />
       </div>
     </header>
   );

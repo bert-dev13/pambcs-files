@@ -1,0 +1,409 @@
+[data-theme='dark'] {
+  --color-primary: #60a5fa;
+  --color-primary-dark: #93c5fd;
+  --color-primary-light: rgba(59, 130, 246, 0.14);
+  --color-accent: #38bdf8;
+
+  --color-primary-rgb: 96, 165, 250;
+  --color-primary-dark-rgb: 147, 197, 253;
+  --color-navy-rgb: 2, 6, 23;
+
+  --color-bg: #050816;
+  --color-card: rgba(17, 24, 39, 0.82);
+  --color-surface: rgba(26, 35, 50, 0.88);
+  --color-surface-raised: rgba(36, 48, 68, 0.92);
+  --color-surface-muted: rgba(13, 20, 32, 0.78);
+  --color-text: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-border: rgba(148, 163, 184, 0.14);
+  --color-border-hover: rgba(148, 163, 184, 0.28);
+
+  --color-divider: rgba(148, 163, 184, 0.14);
+  --color-inset-highlight: rgba(255, 255, 255, 0.04);
+  --color-glow: rgba(59, 130, 246, 0.12);
+
+  --shadow-card:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.38);
+  --shadow-card-hover:
+    0 0 0 1px rgba(96, 165, 250, 0.2),
+    0 12px 36px rgba(0, 0, 0, 0.44);
+  --shadow-header: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+  color-scheme: dark;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+/* Glass surfaces — keep content readable over cosmic background */
+
+[data-theme='dark'] .section-card,
+[data-theme='dark'] .quick-pdf-tools {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme='light'] .section-card,
+[data-theme='light'] .quick-pdf-tools {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Shared section shells ── */
+
+[data-theme='dark'] .section-card,
+[data-theme='dark'] .quick-pdf-tools {
+  background: var(--color-card);
+  border-color: var(--color-border);
+}
+
+[data-theme='dark'] .section-card--incoming,
+[data-theme='dark'] .section-card--returned,
+[data-theme='dark'] .quick-pdf-tools {
+  background:
+    linear-gradient(180deg, rgba(59, 130, 246, 0.06) 0%, rgba(59, 130, 246, 0) 28%),
+    var(--color-card);
+}
+
+[data-theme='dark'] .section-card:hover,
+[data-theme='dark'] .quick-pdf-tools:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-card-hover);
+}
+
+[data-theme='dark'] .section-card__surface-glow,
+[data-theme='dark'] .quick-pdf-tools__surface-glow {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 68%);
+}
+
+[data-theme='dark'] .section-card__top-shine,
+[data-theme='dark'] .quick-pdf-tools__top-shine {
+  opacity: 0.35;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 20%,
+    rgba(255, 255, 255, 0.12) 80%,
+    transparent 100%
+  );
+}
+
+[data-theme='dark'] .section-card__header,
+[data-theme='dark'] .quick-pdf-tools__header {
+  border-bottom-color: var(--color-divider);
+}
+
+[data-theme='dark'] .section-card__divider-line,
+[data-theme='dark'] .quick-pdf-tools__divider-line {
+  background: linear-gradient(
+    90deg,
+    rgba(96, 165, 250, 0.45) 0%,
+    var(--color-divider) 55%,
+    transparent 100%
+  );
+}
+
+[data-theme='dark'] .section-card__count,
+[data-theme='dark'] .quick-pdf-tools__count,
+[data-theme='dark'] .section-card--incoming .section-card__count,
+[data-theme='dark'] .section-card--returned .section-card__count {
+  color: #bfdbfe;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(96, 165, 250, 0.22);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .section-card__count-icon,
+[data-theme='dark'] .quick-pdf-tools__count-icon {
+  color: #60a5fa;
+}
+
+[data-theme='dark'] .section-card--incoming .section-card__icon-wrap,
+[data-theme='dark'] .section-card--returned .section-card__icon-wrap,
+[data-theme='dark'] .quick-pdf-tools__icon-wrap {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(96, 165, 250, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .section-card--incoming:hover .section-card__icon-wrap,
+[data-theme='dark'] .section-card--returned:hover .section-card__icon-wrap,
+[data-theme='dark'] .quick-pdf-tools:hover .quick-pdf-tools__icon-wrap {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(96, 165, 250, 0.32);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
+}
+
+[data-theme='dark'] .section-card__panel,
+[data-theme='dark'] .quick-pdf-tools__panel,
+[data-theme='dark'] .section-card--incoming .section-card__panel,
+[data-theme='dark'] .section-card--returned .section-card__panel,
+[data-theme='dark'] .section-card--incoming:hover .section-card__panel,
+[data-theme='dark'] .section-card--returned:hover .section-card__panel,
+[data-theme='dark'] .quick-pdf-tools:hover .quick-pdf-tools__panel {
+  background: var(--color-surface-muted);
+  border-color: var(--color-border);
+  box-shadow: inset 0 1px 0 var(--color-inset-highlight);
+}
+
+[data-theme='dark'] .section-card:hover .section-card__panel,
+[data-theme='dark'] .quick-pdf-tools:hover .quick-pdf-tools__panel {
+  border-color: var(--color-border-hover);
+  box-shadow:
+    inset 0 1px 0 var(--color-inset-highlight),
+    inset 0 0 0 1px rgba(59, 130, 246, 0.08);
+}
+
+/* ── Employee cards ── */
+
+[data-theme='dark'] .employee-card--blue {
+  --avatar-accent: #60a5fa;
+  --avatar-accent-soft: rgba(59, 130, 246, 0.18);
+}
+
+[data-theme='dark'] .employee-card--indigo {
+  --avatar-accent: #818cf8;
+  --avatar-accent-soft: rgba(99, 102, 241, 0.18);
+}
+
+[data-theme='dark'] .employee-card--sky {
+  --avatar-accent: #38bdf8;
+  --avatar-accent-soft: rgba(56, 189, 248, 0.18);
+}
+
+[data-theme='dark'] .employee-card--cyan {
+  --avatar-accent: #22d3ee;
+  --avatar-accent-soft: rgba(34, 211, 238, 0.16);
+}
+
+[data-theme='dark'] .employee-card {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .employee-card:hover {
+  background: var(--color-surface-raised);
+  border-color: color-mix(in srgb, var(--avatar-accent) 35%, var(--color-border-hover));
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.24),
+    0 0 0 1px color-mix(in srgb, var(--avatar-accent) 12%, transparent);
+}
+
+[data-theme='dark'] .employee-card:active {
+  background: color-mix(in srgb, var(--avatar-accent-soft) 65%, var(--color-surface));
+}
+
+[data-theme='dark'] .employee-card__avatar {
+  color: var(--avatar-accent);
+  background: color-mix(in srgb, var(--avatar-accent-soft) 80%, var(--color-surface-raised));
+  border-color: color-mix(in srgb, var(--avatar-accent) 28%, transparent);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .employee-card:hover .employee-card__avatar {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--avatar-accent) 24%, transparent);
+}
+
+[data-theme='dark'] .employee-card__name {
+  color: var(--color-text);
+}
+
+[data-theme='dark'] .employee-card:hover .employee-card__name {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .employee-card__action {
+  color: var(--avatar-accent);
+  background: rgba(15, 23, 42, 0.55);
+  border-color: color-mix(in srgb, var(--avatar-accent) 22%, var(--color-border));
+  box-shadow: none;
+}
+
+[data-theme='dark'] .employee-card:hover .employee-card__action {
+  background: linear-gradient(
+    135deg,
+    var(--avatar-accent) 0%,
+    color-mix(in srgb, var(--avatar-accent) 75%, #0f172a) 100%
+  );
+  color: #ffffff;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--avatar-accent) 28%, transparent);
+}
+
+/* ── Year cards ── */
+
+[data-theme='dark'] .year-card {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .year-card:hover {
+  background: var(--color-surface-raised);
+  border-color: var(--color-border-hover);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(96, 165, 250, 0.1);
+}
+
+[data-theme='dark'] .year-card--unavailable {
+  opacity: 0.55;
+  background: var(--color-surface-muted);
+}
+
+[data-theme='dark'] .year-card--unavailable:hover {
+  box-shadow: none;
+}
+
+[data-theme='dark'] .year-card__icon-wrap {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(96, 165, 250, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .year-card:hover .year-card__icon-wrap {
+  background: rgba(59, 130, 246, 0.22);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .year-card--unavailable .year-card__icon-wrap {
+  color: var(--color-text-muted);
+  background: rgba(148, 163, 184, 0.08);
+  border-color: var(--color-border);
+}
+
+[data-theme='dark'] .year-card__year {
+  color: var(--color-text);
+}
+
+[data-theme='dark'] .year-card:hover .year-card__year {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .year-card__label {
+  color: var(--color-text-secondary);
+}
+
+[data-theme='dark'] .year-card:hover .year-card__label {
+  color: #93c5fd;
+}
+
+[data-theme='dark'] .year-card__action {
+  background: rgba(15, 23, 42, 0.45);
+  border-color: var(--color-border);
+}
+
+[data-theme='dark'] .year-card__action-text {
+  color: #bfdbfe;
+}
+
+[data-theme='dark'] .year-card:hover .year-card__action {
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(96, 165, 250, 0.24);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .year-card__action-icon-wrap {
+  background: #3b82f6;
+}
+
+[data-theme='dark'] .year-card:hover .year-card__action-icon-wrap {
+  background: #60a5fa;
+}
+
+/* ── PDF tool cards ── */
+
+[data-theme='dark'] .pdf-tool-card--blue {
+  --tool-accent: #60a5fa;
+  --tool-accent-soft: rgba(59, 130, 246, 0.18);
+}
+
+[data-theme='dark'] .pdf-tool-card--indigo {
+  --tool-accent: #818cf8;
+  --tool-accent-soft: rgba(99, 102, 241, 0.18);
+}
+
+[data-theme='dark'] .pdf-tool-card--sky {
+  --tool-accent: #38bdf8;
+  --tool-accent-soft: rgba(56, 189, 248, 0.18);
+}
+
+[data-theme='dark'] .pdf-tool-card--cyan {
+  --tool-accent: #22d3ee;
+  --tool-accent-soft: rgba(34, 211, 238, 0.16);
+}
+
+[data-theme='dark'] .pdf-tool-card {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .pdf-tool-card:hover {
+  background: var(--color-surface-raised);
+  border-color: color-mix(in srgb, var(--tool-accent) 35%, var(--color-border-hover));
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.28),
+    0 0 0 1px color-mix(in srgb, var(--tool-accent) 12%, transparent);
+}
+
+[data-theme='dark'] .pdf-tool-card__icon-wrap {
+  color: var(--tool-accent);
+  background: color-mix(in srgb, var(--tool-accent-soft) 85%, var(--color-surface-raised));
+  border-color: color-mix(in srgb, var(--tool-accent) 24%, transparent);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .pdf-tool-card:hover .pdf-tool-card__icon-wrap {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--tool-accent) 22%, transparent);
+}
+
+[data-theme='dark'] .pdf-tool-card__name {
+  color: var(--color-text);
+}
+
+[data-theme='dark'] .pdf-tool-card:hover .pdf-tool-card__name {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .pdf-tool-card__description {
+  color: var(--color-text-secondary);
+}
+
+[data-theme='dark'] .pdf-tool-card:hover .pdf-tool-card__description {
+  color: #cbd5e1;
+}
+
+[data-theme='dark'] .pdf-tool-card__action {
+  background: rgba(15, 23, 42, 0.45);
+  border-color: var(--color-border);
+}
+
+[data-theme='dark'] .pdf-tool-card__action-text {
+  color: color-mix(in srgb, var(--tool-accent) 80%, #ffffff);
+}
+
+[data-theme='dark'] .pdf-tool-card:hover .pdf-tool-card__action {
+  background: color-mix(in srgb, var(--tool-accent-soft) 75%, transparent);
+  border-color: color-mix(in srgb, var(--tool-accent) 28%, var(--color-border));
+  box-shadow: none;
+}
+
+[data-theme='dark'] .pdf-tool-card__action-icon-wrap {
+  background: var(--tool-accent);
+}
+
+[data-theme='dark'] .pdf-tool-card:hover .pdf-tool-card__action-icon-wrap {
+  background: color-mix(in srgb, var(--tool-accent) 88%, #ffffff);
+}

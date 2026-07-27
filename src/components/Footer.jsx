@@ -1,7 +1,10 @@
-import { FiShield, FiMapPin, FiCalendar } from 'react-icons/fi';
+import { FiMapPin, FiCalendar } from 'react-icons/fi';
+import denrLogo from '@assets/images/DENR-LOGO.png';
 import '../styles/Footer.css';
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="footer">
       <div className="footer__bar">
@@ -11,9 +14,11 @@ function Footer() {
         <div className="footer__container">
           <div className="footer__col footer__col--left">
             <div className="footer__brand">
-              <span className="footer__icon-wrap" aria-hidden="true">
-                <FiShield className="footer__icon" />
-              </span>
+              <img
+                src={denrLogo}
+                alt="Department of Environment and Natural Resources logo"
+                className="footer__logo"
+              />
               <div className="footer__brand-text">
                 <span className="footer__portal-name">PAMBCS Submission Portal</span>
                 <span className="footer__office">DENR CDD</span>
@@ -32,7 +37,7 @@ function Footer() {
             </p>
             <p className="footer__copyright">
               <FiCalendar className="footer__meta-icon" aria-hidden="true" />
-              &copy; 2026 All rights reserved
+              &copy; {currentYear} All rights reserved
             </p>
           </div>
         </div>

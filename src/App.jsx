@@ -7,29 +7,14 @@ import { returnedFiles } from './data/returnedFiles';
 import './styles/App.css';
 
 const QuickPdfTools = lazy(() => import('./components/QuickPdfTools'));
+const CosmicBackground = lazy(() => import('./components/cosmic/CosmicBackground'));
 
 function App() {
   return (
     <div className="app">
-      <div className="app__background" aria-hidden="true">
-        <div className="app__mesh" />
-        <div className="app__mesh app__mesh--layer-2" />
-        <div className="app__grid" />
-        <span className="app__beam" />
-        <span className="app__orb app__orb--primary" />
-        <span className="app__orb app__orb--accent" />
-        <span className="app__orb app__orb--soft" />
-        <span className="app__orb app__orb--glow" />
-        <div className="app__particles">
-          {Array.from({ length: 18 }, (_, i) => (
-            <span
-              key={i}
-              className="app__particle"
-              style={{ '--particle-index': i }}
-            />
-          ))}
-        </div>
-      </div>
+      <Suspense fallback={null}>
+        <CosmicBackground />
+      </Suspense>
 
       <div className="app__content">
         <Header />

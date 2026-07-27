@@ -1,0 +1,239 @@
+.cosmic-bg {
+  --cosmic-mouse-x: 50%;
+  --cosmic-mouse-y: 35%;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+.cosmic-bg--ready {
+  opacity: 1;
+}
+
+/* ── Theme palettes ── */
+
+.cosmic-bg--dark .cosmic-bg__gradient {
+  background: linear-gradient(180deg, #050816 0%, #0b1120 52%, #070b14 100%);
+}
+
+.cosmic-bg--light .cosmic-bg__gradient {
+  background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 48%, #f1f5f9 100%);
+}
+
+.cosmic-bg__gradient {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Nebula glow behind hero / header zone ── */
+
+.cosmic-bg__nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.cosmic-bg--dark .cosmic-bg__nebula--purple {
+  top: -8%;
+  left: 18%;
+  width: min(520px, 70vw);
+  height: min(520px, 70vw);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.28) 0%, transparent 68%);
+  animation: cosmicNebulaDrift 28s ease-in-out infinite;
+}
+
+.cosmic-bg--dark .cosmic-bg__nebula--blue {
+  top: 4%;
+  right: 10%;
+  width: min(480px, 62vw);
+  height: min(480px, 62vw);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, transparent 68%);
+  animation: cosmicNebulaDriftAlt 34s ease-in-out infinite;
+}
+
+.cosmic-bg--dark .cosmic-bg__nebula--cyan {
+  top: 22%;
+  left: 42%;
+  width: min(360px, 48vw);
+  height: min(360px, 48vw);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.1) 0%, transparent 70%);
+  animation: cosmicNebulaPulse 22s ease-in-out infinite;
+}
+
+.cosmic-bg--light .cosmic-bg__nebula--purple {
+  top: -6%;
+  left: 20%;
+  width: min(460px, 68vw);
+  height: min(460px, 68vw);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 68%);
+  animation: cosmicNebulaDrift 32s ease-in-out infinite;
+}
+
+.cosmic-bg--light .cosmic-bg__nebula--blue {
+  top: 6%;
+  right: 12%;
+  width: min(420px, 58vw);
+  height: min(420px, 58vw);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 68%);
+  animation: cosmicNebulaDriftAlt 38s ease-in-out infinite;
+}
+
+.cosmic-bg--light .cosmic-bg__nebula--cyan {
+  top: 24%;
+  left: 44%;
+  width: min(320px, 44vw);
+  height: min(320px, 44vw);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.06) 0%, transparent 70%);
+  animation: cosmicNebulaPulse 26s ease-in-out infinite;
+}
+
+/* ── Canvas starfield layer ── */
+
+.cosmic-bg__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateZ(0);
+  will-change: contents;
+}
+
+/* ── Mouse-reactive radial glow ── */
+
+.cosmic-bg__mouse-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--cosmic-mouse-x) var(--cosmic-mouse-y),
+    var(--cosmic-mouse-color) 0%,
+    transparent 42%
+  );
+  opacity: 0.85;
+  transition: opacity 300ms ease;
+  transform: translateZ(0);
+}
+
+.cosmic-bg--dark {
+  --cosmic-mouse-color: rgba(59, 130, 246, 0.11);
+}
+
+.cosmic-bg--light {
+  --cosmic-mouse-color: rgba(124, 58, 237, 0.07);
+}
+
+/* ── Floating dust particles (mid parallax layer) ── */
+
+.cosmic-bg__dust {
+  position: absolute;
+  inset: 0;
+}
+
+.cosmic-bg__dust-particle {
+  --dust-x: calc((var(--dust-index) * 19 + 7) * 1%);
+  --dust-size: calc(1px + (var(--dust-index) % 3) * 0.5px);
+  --dust-duration: calc(38s + (var(--dust-index) % 7) * 6s);
+  --dust-delay: calc(var(--dust-index) * -2.7s);
+  --dust-shift: calc((var(--dust-index) % 5 - 2) * 14px);
+
+  position: absolute;
+  left: var(--dust-x);
+  bottom: -4%;
+  width: var(--dust-size);
+  height: var(--dust-size);
+  border-radius: 50%;
+  background: var(--cosmic-dust-color);
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  animation: cosmicDustFloat var(--dust-duration) linear infinite;
+  animation-delay: var(--dust-delay);
+  will-change: transform, opacity;
+}
+
+.cosmic-bg--dark {
+  --cosmic-dust-color: rgba(148, 163, 184, 0.35);
+}
+
+.cosmic-bg--light {
+  --cosmic-dust-color: rgba(100, 116, 139, 0.22);
+}
+
+/* ── Animated noise texture ── */
+
+.cosmic-bg__noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: soft-light;
+  animation: cosmicNoiseShift 12s steps(8) infinite;
+  pointer-events: none;
+}
+
+.cosmic-bg--light .cosmic-bg__noise {
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+}
+
+/* ── Keyframes ── */
+
+@keyframes cosmicNebulaDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(3%, 2%, 0) scale(1.06); }
+}
+
+@keyframes cosmicNebulaDriftAlt {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-4%, 3%, 0) scale(1.05); }
+}
+
+@keyframes cosmicNebulaPulse {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes cosmicDustFloat {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.35; }
+  100% {
+    transform: translate3d(var(--dust-shift), -108vh, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes cosmicNoiseShift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-12%, -8%, 0); }
+}
+
+@media (max-width: 767px) {
+  .cosmic-bg__nebula {
+    filter: blur(56px);
+  }
+
+  .cosmic-bg__mouse-glow {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-bg__nebula,
+  .cosmic-bg__dust-particle,
+  .cosmic-bg__noise {
+    animation: none !important;
+  }
+
+  .cosmic-bg__nebula--cyan {
+    opacity: 0.75;
+  }
+}
