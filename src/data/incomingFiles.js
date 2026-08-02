@@ -9,4 +9,6 @@ export const incomingFiles = [
   { name: 'Medie', link: 'https://drive.google.com/drive/folders/1T2OIcQuEPS76VIE490zkxbWy314kahDU?usp=sharing' },
   { name: 'Jessper', link: 'https://drive.google.com/drive/folders/1_bO68umdMsH7WHHme04XgSWt1ztEefWs?usp=sharing' },
   { name: 'Engelbert', link: 'https://drive.google.com/drive/folders/15fwX-GpjHZGN_tIGLpPcBYYjj9Fd7bG0?usp=sharing' },
+  { name: 'Genette', link: 'https://drive.google.com/drive/folders/1uLK6WqAhDyViKeuHpNDH0ytnX0560QvG?usp=sharing' },
+  { name: 'Krivialuk', link: 'https://drive.google.com/drive/folders/1Zog1iP6JOjcawwuMsseqJzNIOw9OSsEN?usp=sharing' },
 ];
