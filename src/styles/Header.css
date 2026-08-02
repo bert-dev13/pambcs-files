@@ -88,12 +88,9 @@
 }
 
 .header__theme-toggle {
-  position: absolute;
-  top: 22px;
-  right: max(24px, calc((100% - var(--max-width)) / 2 + 24px));
-  z-index: 101;
-  animation: headerItemEnter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: 220ms;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .header__container {
@@ -256,10 +253,6 @@
     padding: 14px 20px 0;
   }
 
-  .header__theme-toggle {
-    right: 20px;
-  }
-
   .header__container {
     padding: 12px 18px;
     gap: 14px;
@@ -274,14 +267,13 @@
     padding: 12px 16px 0;
   }
 
-  .header__theme-toggle {
-    top: 18px;
-    right: 16px;
-  }
-
   .header__container {
     padding: 11px 14px;
     gap: 10px;
+  }
+
+  .header__theme-toggle {
+    margin-top: 8px;
   }
 
   .header__logo-img--denr { height: 38px; }

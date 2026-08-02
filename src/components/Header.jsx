@@ -26,6 +26,9 @@ function Header() {
             <p className="header__subtitle">
               Centralized document submission and return management
             </p>
+            <div className="header__theme-toggle">
+              <ThemeToggle />
+            </div>
             <span className="header__accent-line" aria-hidden="true" />
           </div>
 
@@ -37,10 +40,6 @@ function Header() {
             />
           </div>
         </div>
-      </div>
-
-      <div className="header__theme-toggle">
-        <ThemeToggle />
       </div>
     </header>
   );
